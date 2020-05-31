@@ -56,6 +56,11 @@ public class AccountResource {
         this.persistentTokenRepository = persistentTokenRepository;
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "wwwwwwwwwwwwww";
+    }
+
     /**
      * {@code POST  /register} : register the user.
      *

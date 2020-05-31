@@ -24,4 +24,10 @@ public class WebsocketSecurityConfiguration extends AbstractSecurityWebSocketMes
             // catch all
             .anyMessage().denyAll();
     }
+
+    //关闭csrf
+//    @Override
+//    protected boolean sameOriginDisabled() {
+//        return false;
+//    }
 }

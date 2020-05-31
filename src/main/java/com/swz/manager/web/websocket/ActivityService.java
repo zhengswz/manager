@@ -6,6 +6,7 @@ import com.swz.manager.web.websocket.dto.ActivityDTO;
 
 import java.security.Principal;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.handler.annotation.*;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
@@ -37,6 +39,14 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         log.debug("Sending user tracking data {}", activityDTO);
         return activityDTO;
     }
+
+   @Scheduled(cron = "*/5 * * * * ?")
+   public void test(){
+       System.out.println(ZonedDateTime.now().toString());
+       messagingTemplate.convertAndSend("/topic/tracker", ZonedDateTime.now().toString());
+   }
+
+
 
     @Override
     public void onApplicationEvent(SessionDisconnectEvent event) {
